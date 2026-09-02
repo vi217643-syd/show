@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>焙行 Roast &amp; Roam — 慢火，慢冲，慢行</title>
+<meta name="description" content="焙行 Roast & Roam 是一间以慢烘焙与手冲为主线的精品咖啡馆。坚持单一产区、小批次烘焙，让一杯咖啡回到它本来的味道。" />
+<style>
+  /* ---------- 极简白色 · 设计令牌 ---------- */
+  :root{
+    --bg:#ffffff;
+    --ink:#141414;
+    --ink-soft:#6c6c6c;
+    --ink-faint:#a9a9a9;
+    --line:#e8e8e8;
+    --line-strong:#1a1a1a;
+    --paper:#faf9f7;
+    --paper-2:#f2efe9;
+    --serif: "Cormorant Garamond", "Playfair Display", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --maxw: 1200px;
+    --gutter: 24px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em;line-height:1.15;margin:0}
+  p{margin:0}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+  .hairline{height:1px;background:var(--line);border:0;width:100%}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+
+  /* ---------- SVG 占位插画 ---------- */
+  .ph{display:block;width:100%;height:100%;color:#232323}
+  .hero__bg .ph{padding:5% 8%}
+  .story__media .ph{aspect-ratio:4/5}
+  .card__media .ph{transition:transform .8s ease}
+  .card:hover .card__media .ph{transform:scale(1.04)}
+  .place__cell .ph{transition:transform .8s ease}
+  .place__cell:hover .ph{transform:scale(1.05)}
+  .hero__bg,.card__media,.place__cell,.story__media{background:var(--paper-2)}
+
+  /* ---------- 顶部导航 ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(160%) blur(10px);
+    -webkit-backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:border-color .3s ease;
+  }
+  .nav__inner{
+    max-width:var(--maxw);margin:0 auto;
+    padding:18px var(--gutter);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;line-height:1}
+  .brand__cn{font-family:var(--serif);font-size:22px;letter-spacing:.18em}
+  .brand__en{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)}
+  .nav__links{display:flex;gap:34px;list-style:none;margin:0;padding:0}
+  .nav__links a{
+    font-size:13px;letter-spacing:.12em;color:var(--ink-soft);
+    padding:6px 0;position:relative;transition:color .2s ease;
+  }
+  .nav__links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--line-strong);transition:width .3s ease;
+  }
+  .nav__links a:hover{color:var(--ink)}
+  .nav__links a.is-active{color:var(--ink)}
+  .nav__links a.is-active::after{width:100%}
+  .nav__toggle{display:none;width:40px;height:40px;border:0;background:transparent;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+  .nav__toggle span{display:block;width:20px;height:1px;background:var(--ink);transition:transform .3s ease,opacity .2s ease}
+  .nav__toggle.is-open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav__toggle.is-open span:nth-child(2){opacity:0}
+  .nav__toggle.is-open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+  /* ---------- 通用 section ---------- */
+  section{padding:120px 0}
+  .section__head{max-width:760px;margin-bottom:64px}
+  .section__head h2{font-size:clamp(34px,4.4vw,56px);margin-bottom:20px}
+  .section__head p{color:var(--ink-soft);font-size:17px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:0;position:relative}
+  .hero__inner{
+    min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:160px 0 72px;position:relative;overflow:hidden;
+  }
+  .hero__bg{position:absolute;inset:0;z-index:0}
+  .hero__bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(242,239,233,.55) 0%, rgba(242,239,233,.2) 35%, rgba(255,255,255,.65) 100%);
+  }
+  .hero__content{position:relative;z-index:2;max-width:640px}
+  .hero__title{
+    font-size:clamp(48px,8vw,108px);line-height:1.02;letter-spacing:-.01em;margin-bottom:24px;
+  }
+  .hero__title em{font-style:italic;color:#3a3a3a}
+  .hero__sub{font-size:18px;color:var(--ink-soft);max-width:520px;margin-bottom:36px}
+  .hero__cta{
+    display:inline-flex;align-items:center;gap:14px;
+    border:1px solid var(--line-strong);padding:16px 28px;
+    font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .hero__cta:hover{background:var(--ink);color:#fff}
+  .hero__cta .arr{display:inline-block;transition:transform .25s ease}
+  .hero__cta:hover .arr{transform:translateX(4px)}
+  .hero__meta{
+    position:relative;z-index:2;margin-top:64px;
+    display:flex;gap:48px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:24px;
+  }
+  .hero__meta dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+  .hero__meta dd{margin:0;font-size:15px}
+
+  /* ---------- 品牌故事 ---------- */
+  .story{background:var(--paper)}
+  .story__grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .story__text h2{font-size:clamp(32px,4vw,48px);margin-bottom:24px}
+  .story__text p{color:var(--ink-soft);margin-bottom:18px;font-size:16px}
+  .story__text .pull{
+    font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);
+    border-left:1px solid var(--line-strong);padding-left:18px;margin:28px 0;
+  }
+  .story__media svg{width:100%}
+  .story__cap{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-top:12px}
+
+  /* ---------- 菜单 ---------- */
+  .menu__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .card{display:flex;flex-direction:column}
+  .card__media{aspect-ratio:1/1;overflow:hidden;position:relative}
+  .card__tag{
+    position:absolute;top:14px;left:14px;
+    background:rgba(255,255,255,.92);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    padding:6px 10px;color:var(--ink-soft);
+  }
+  .card__body{padding-top:18px;border-top:1px solid var(--line);margin-top:18px}
+  .card__name{font-family:var(--serif);font-size:22px;margin-bottom:6px}
+  .card__desc{font-size:14px;color:var(--ink-soft);margin-bottom:14px;min-height:44px}
+  .card__foot{display:flex;justify-content:space-between;align-items:baseline}
+  .card__price{font-family:var(--serif);font-size:18px}
+  .card__origin{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---------- 环境图集 ---------- */
+  .place__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .place__cell{overflow:hidden;position:relative}
+  .place__cell--a{grid-column:span 2;aspect-ratio:3/4}
+  .place__cell--b{grid-column:span 3;aspect-ratio:5/4}
+  .place__cell--c{grid-column:span 1;aspect-ratio:1/2}
+  .place__cell--d{grid-column:span 3;aspect-ratio:5/4}
+  .place__cell--e{grid-column:span 3;aspect-ratio:5/4}
+
+  /* ---------- 到店信息 ---------- */
+  .visit{background:var(--paper)}
+  .visit__grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
+  .visit__info dl{margin:0 0 32px;display:grid;grid-template-columns:140px 1fr;gap:8px 24px}
+  .visit__info dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);padding-top:6px}
+  .visit__info dd{margin:0;font-size:16px;color:var(--ink)}
+  .visit__hours{border-top:1px solid var(--line);padding-top:28px}
+  .visit__hours h3{font-size:18px;margin-bottom:16px;font-family:var(--sans);font-weight:500;letter-spacing:.04em}
+  .visit__hours ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+  .visit__hours li{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-soft);border-bottom:1px dashed var(--line);padding-bottom:8px}
+  .visit__hours li span:last-child{color:var(--ink);font-family:var(--serif)}
+  .visit__map{height:420px;background:#f0efed;position:relative;border:1px solid var(--line)}
+  .visit__map .pin{
+    position:absolute;left:48%;top:46%;width:14px;height:14px;border-radius:50%;
+    background:var(--line-strong);box-shadow:0 0 0 6px rgba(0,0,0,.06)
+  }
+  .visit__map .pin::after{
+    content:"焙行 · 永康店";position:absolute;left:24px;top:-4px;
+    white-space:nowrap;font-size:12px;letter-spacing:.1em;background:#fff;
+    border:1px solid var(--line);padding:4px 8px;
+  }
+  .visit__map .gridlines{
+    position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{padding:72px 0 40px;border-top:1px solid var(--line)}
+  .foot__top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:56px}
+  .foot__brand .brand__cn{font-size:28px}
+  .foot__tag{color:var(--ink-soft);font-size:14px;max-width:340px;margin-top:10px}
+  .foot__cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot__col h4{margin:0 0 14px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);font-family:var(--sans);font-weight:500}
+  .foot__col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .foot__col a{font-size:14px;color:var(--ink-soft);transition:color .2s}
+  .foot__col a:hover{color:var(--ink)}
+  .foot__bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ink-faint);letter-spacing:.06em}
+
+  /* ---------- 滚动显隐 ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.is-in{opacity:1;transform:none}
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:900px){
+    section{padding:88px 0}
+    .nav__links{
+      position:fixed;inset:72px 0 auto 0;background:#fff;
+      flex-direction:column;gap:0;padding:0 24px;
+      border-bottom:1px solid var(--line);
+      max-height:0;overflow:hidden;transition:max-height .35s ease;
+    }
+    .nav__links.is-open{max-height:320px}
+    .nav__links li{border-bottom:1px solid var(--line)}
+    .nav__links a{display:block;padding:18px 0;font-size:15px}
+    .nav__toggle{display:flex}
+    .hero__inner{min-height:auto;padding:128px 0 56px}
+    .hero__meta{gap:28px}
+    .story__grid,.visit__grid{grid-template-columns:1fr;gap:40px}
+    .menu__grid{grid-template-columns:repeat(2,1fr)}
+    .place__grid{grid-template-columns:repeat(2,1fr)}
+    .place__cell--a,.place__cell--b,.place__cell--c,.place__cell--d,.place__cell--e{grid-column:span 1;aspect-ratio:4/3}
+  }
+  @media (max-width:560px){
+    .menu__grid{grid-template-columns:1fr;gap:48px}
+    .visit__info dl{grid-template-columns:1fr;gap:2px}
+    .visit__hours ul{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG 线框插画集（隐藏，仅作 spritesheet） -->
+<svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <g id="stroke" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></g>
+  </defs>
+
+  <!-- Hero：吧台上的咖啡杯 + 蒸汽 -->
+  <symbol id="ico-hero" viewBox="0 0 480 300">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M196 36 C 206 50, 186 60, 196 74" opacity=".7"/>
+      <path d="M232 28 C 246 46, 218 58, 232 76" opacity=".55"/>
+      <path d="M268 36 C 278 50, 258 60, 268 74" opacity=".7"/>
+      <path d="M120 232 L 360 232"/>
+      <path d="M176 232 L 176 188 Q 176 162 200 162 L 280 162 Q 304 162 304 188 L 304 232 Z"/>
+      <ellipse cx="240" cy="166" rx="64" ry="8"/>
+      <path d="M304 184 Q 332 188, 332 204 Q 332 220, 304 220"/>
+      <path d="M214 168 q 8 -10 16 0"/>
+      <path d="M240 170 q 4 -6 8 0"/>
+      <path d="M266 168 q 8 -10 16 0"/>
+      <circle cx="120" cy="226" r="6"/><path d="M120 220 v12 M114 226 h12"/>
+      <circle cx="360" cy="230" r="6"/><path d="M360 224 v12 M354 230 h12"/>
+      <circle cx="96" cy="196" r="5"/>
+      <circle cx="384" cy="196" r="5"/>
+      <path d="M150 232 v8 M330 232 v8" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 品牌故事：手冲壶 + V60 -->
+  <symbol id="ico-pour" viewBox="0 0 300 400">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M120 40 Q 92 56, 100 96 Q 108 132, 140 138" />
+      <path d="M140 60 L 140 110 Q 140 130 160 130 L 200 130 Q 220 130 220 110 L 220 60" />
+      <path d="M220 70 Q 250 72, 250 100 Q 250 128, 220 130" />
+      <path d="M140 60 Q 160 50, 200 50 Q 220 50, 220 60" />
+      <path d="M180 50 v-10" />
+      <path d="M210 132 v6 a4 4 0 0 1 -4 4 h-6" opacity=".6"/>
+      <path d="M200 150 v8 M200 168 v8 M200 186 v8" stroke-dasharray="2 6" />
+      <path d="M120 200 L 180 200 L 165 250 L 135 250 Z" />
+      <path d="M140 200 L 148 250 M160 200 L 158 250 M170 200 L 168 250" opacity=".55"/>
+      <path d="M150 250 v6 a3 3 0 0 0 3 3" opacity=".6"/>
+      <path d="M90 270 L 210 270 L 196 320 L 104 320 Z" />
+      <path d="M210 285 q 26 0, 26 18 q 0 16 -26 16" />
+      <path d="M120 320 v8 M180 320 v8" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 菜单：V60 手冲 -->
+  <symbol id="ico-v60" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M56 56 L 144 56 L 108 124 L 92 124 Z"/>
+      <path d="M70 56 L 96 124 M88 56 L 100 124 M104 56 L 108 118 M118 56 L 112 110" opacity=".55"/>
+      <path d="M100 124 v6"/>
+      <path d="M62 140 L 138 140 L 130 168 L 70 168 Z"/>
+      <path d="M138 148 q 22 0, 22 12 q 0 12 -22 12"/>
+      <path d="M76 168 v6 M124 168 v6" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 菜单：拿铁拉花 -->
+  <symbol id="ico-latte" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="100" cy="100" r="60"/>
+      <circle cx="100" cy="100" r="52" opacity=".5"/>
+      <path d="M100 56 v88"/>
+      <path d="M100 64 q -16 4 -20 16 M100 64 q 16 4 20 16" opacity=".7"/>
+      <path d="M100 80 q -22 4 -26 18 M100 80 q 22 4 26 18" opacity=".7"/>
+      <path d="M100 96 q -26 4 -30 20 M100 96 q 26 4 30 20" opacity=".7"/>
+      <path d="M100 112 q -18 4 -22 16 M100 112 q 18 4 22 16" opacity=".7"/>
+      <circle cx="100" cy="56" r="3" fill="currentColor"/>
+    </g>
+  </symbol>
+
+  <!-- 菜单：冷萃 -->
+  <symbol id="ico-coldbrew" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M70 48 L 130 48 L 124 168 L 76 168 Z"/>
+      <ellipse cx="100" cy="48" rx="30" ry="6"/>
+      <path d="M70 56 L 130 56" opacity=".45"/>
+      <rect x="80" y="74" width="16" height="16" rx="2" opacity=".7"/>
+      <rect x="104" y="86" width="14" height="14" rx="2" opacity=".7"/>
+      <rect x="86" y="108" width="14" height="14" rx="2" opacity=".6"/>
+      <path d="M150 48 L 150 130 q 0 8 -8 8"/>
+      <path d="M70 168 v6 M130 168 v6" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 菜单：巴斯克芝士 -->
+  <symbol id="ico-cake" viewBox="0 0 200 200">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="100" cy="100" r="60"/>
+      <path d="M100 100 L 148 60 A 60 60 0 0 1 160 100 Z" fill="#000" fill-opacity=".05"/>
+      <path d="M100 40 L 100 100"/>
+      <path d="M100 100 L 160 100"/>
+      <path d="M70 76 h8 M82 84 h10 M68 100 h8 M88 100 h6" opacity=".5"/>
+      <path d="M112 70 h6 M118 80 h8 M108 88 h6" opacity=".5"/>
+      <circle cx="100" cy="40" r="4" fill="currentColor"/>
+      <path d="M100 36 q -2 -8 4 -10 q 6 -2 6 4" opacity=".7"/>
+    </g>
+  </symbol>
+
+  <!-- 环境：门头 -->
+  <symbol id="ico-door" viewBox="0 0 240 320">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="60" y="24" width="120" height="40" rx="2"/>
+      <path d="M84 44 h12 M108 44 h12 M132 44 h12" opacity=".5"/>
+      <rect x="70" y="80" width="100" height="200" rx="2"/>
+      <path d="M70 130 H 170 M120 80 V 280" opacity=".55"/>
+      <path d="M70 200 H 170 M120 130 V 200 M120 200 V 280" opacity=".35"/>
+      <circle cx="158" cy="180" r="2.5" fill="currentColor"/>
+      <path d="M44 286 H 196" />
+      <path d="M96 286 v8 M144 286 v8" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 环境：植物与木架 -->
+  <symbol id="ico-plants" viewBox="0 0 400 320">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M64 220 H 336 L 320 250 H 80 Z"/>
+      <path d="M120 220 v-12 M280 220 v-12" opacity=".4"/>
+      <path d="M96 250 v6 M304 250 v6" opacity=".4"/>
+      <path d="M120 220 L 110 178 Q 108 168 116 160 Q 124 154 122 144 Q 120 134 130 130"/>
+      <path d="M115 220 q -4 -16 4 -28 M120 220 q 6 -18 -2 -34 M124 220 q 8 -14 4 -28" opacity=".6"/>
+      <path d="M272 220 L 268 110"/>
+      <path d="M268 130 q -22 -10 -28 -28 M268 150 q 24 -8 30 -24 M268 170 q -20 -6 -24 -20" opacity=".65"/>
+      <path d="M250 220 L 246 196 L 296 196 L 292 220 Z"/>
+      <path d="M96 220 L 92 196 L 142 196 L 138 220 Z"/>
+      <path d="M114 196 v-6 M126 196 v-6" opacity=".4"/>
+    </g>
+  </symbol>
+
+  <!-- 环境：吧台咖啡机 -->
+  <symbol id="ico-bar" viewBox="0 0 240 320">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 220 H 200"/>
+      <rect x="64" y="100" width="100" height="80" rx="4"/>
+      <path d="M64 120 H 164 M64 160 H 164" opacity=".5"/>
+      <path d="M84 140 h12 M104 140 h12 M124 140 h12"/>
+      <path d="M96 180 v6 M132 180 v6"/>
+      <path d="M150 100 v-12 q 0 -8 8 -8 q 8 0 8 8 v6"/>
+      <path d="M170 100 v-8 q 0 -6 6 -6 q 6 0 6 6 v8"/>
+      <path d="M72 220 v12 M156 220 v12" opacity=".4"/>
+      <path d="M180 220 L 200 200 L 200 240 L 180 220 Z"/>
+      <path d="M70 222 h-14 q -4 0 -4 -4 v-12" opacity=".6"/>
+    </g>
+  </symbol>
+
+  <!-- 环境：窗边单椅 -->
+  <symbol id="ico-window" viewBox="0 0 400 320">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="40" y="40" width="200" height="200" rx="2"/>
+      <path d="M140 40 V 240 M40 140 H 240" opacity=".55"/>
+      <path d="M40 60 H 240 M40 220 H 240" opacity=".35"/>
+      <path d="M280 240 v-90 M280 150 q -8 0 -8 -10 v-30 q 0 -10 10 -10"/>
+      <path d="M282 240 q -4 -8 -4 -16 M278 240 q 4 -8 4 -16" opacity=".6"/>
+      <ellipse cx="312" cy="250" rx="28" ry="6"/>
+      <path d="M300 250 v-20 M324 250 v-20 M312 244 v-20" opacity=".6"/>
+      <path d="M300 234 h24 M300 230 h24" opacity=".5"/>
+      <ellipse cx="312" cy="230" rx="3" ry="2" fill="currentColor"/>
+    </g>
+  </symbol>
+
+  <!-- 环境：全景 -->
+  <symbol id="ico-pano" viewBox="0 0 480 320">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 240 H 440"/>
+      <rect x="60" y="190" width="360" height="40" rx="2"/>
+      <circle cx="120" cy="240" r="18"/>
+      <path d="M120 258 v14 M102 240 h36" opacity=".5"/>
+      <circle cx="220" cy="240" r="18"/>
+      <path d="M220 258 v14 M202 240 h36" opacity=".5"/>
+      <circle cx="320" cy="240" r="18"/>
+      <path d="M320 258 v14 M302 240 h36" opacity=".5"/>
+      <rect x="80" y="60" width="80" height="56" rx="2" opacity=".7"/>
+      <rect x="200" y="48" width="100" height="68" rx="2" opacity=".7"/>
+      <rect x="340" y="72" width="70" height="44" rx="2" opacity=".7"/>
+      <path d="M250 48 v-22 M240 26 h20" opacity=".6"/>
+      <path d="M250 116 v6 a6 6 0 0 0 6 6 h8 a6 6 0 0 0 6 -6 v-6" opacity=".55"/>
+      <path d="M150 190 v-10 M330 190 v-10" opacity=".35"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- 导航 -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#hero">
+      <span class="brand__cn">焙行</span>
+      <span class="brand__en">Roast &amp; Roam</span>
+    </a>
+    <nav>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#story" data-link="story">品牌</a></li>
+        <li><a href="#menu" data-link="menu">菜单</a></li>
+        <li><a href="#place" data-link="place">空间</a></li>
+        <li><a href="#visit" data-link="visit">到店</a></li>
+      </ul>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero__inner wrap">
+    <div class="hero__bg">
+      <svg class="ph" role="img" aria-label="清晨吧台上的手冲咖啡"><use href="#ico-hero"/></svg>
+    </div>
+    <div class="hero__content">
+      <p class="eyebrow">Single Origin · Small Batch · Slow Brew</p>
+      <h1 class="hero__title">慢火，<em>慢冲</em>，<br/>慢行。</h1>
+      <p class="hero__sub">焙行是一间坚持单一产区、小批次烘焙的精品咖啡馆。我们把每杯咖啡还原到它本来的样子——干净、明亮、有产地。</p>
+      <a href="#menu" class="hero__cta">看看今日出品 <span class="arr">→</span></a>
+    </div>
+    <dl class="hero__meta">
+      <div><dt>产区</dt><dd>埃塞俄比亚 · 耶加雪菲</dd></div>
+      <div><dt>烘焙</dt><dd>每周二 · 小批次 6kg</dd></div>
+      <div><dt>营业</dt><dd>每日 08:00 — 21:00</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 品牌故事 -->
+<section class="story" id="story">
+  <div class="wrap story__grid">
+    <div class="story__text reveal">
+      <p class="eyebrow">Our Story · 品牌故事</p>
+      <h2>把一杯咖啡，<br/>做得像它本来那样。</h2>
+      <p>2019 年，我们在永康街拐角开了一间只够放八张椅子的小店。没有招牌，只有一条线：让每个走进来的人，都能喝到一杯「像样的」咖啡。</p>
+      <p class="pull">"我们不卖风味轮，我们卖一杯安静的下午。"</p>
+      <p>七年过去，烘焙机从 1kg 换到 6kg，菜单只多了三款。咖啡豆按月直采，烘焙每周二进行，手冲水温 92℃，粉水比 1:15。其余的，都尽量不做加法。</p>
+    </div>
+    <figure class="story__media reveal">
+      <svg class="ph" role="img" aria-label="咖啡师手冲过程"><use href="#ico-pour"/></svg>
+      <figcaption class="story__cap">— 每日 14:00 手冲演示</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 菜单 -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">The Menu · 今日出品</p>
+      <h2>四杯，刚刚好。</h2>
+      <p>我们刻意把菜单压短。少了选项，每个名字背后才有时间被认真对待。</p>
+    </div>
+    <div class="menu__grid">
+      <article class="card reveal">
+        <div class="card__media">
+          <span class="card__tag">手冲</span>
+          <svg class="ph" role="img" aria-label="V60 手冲"><use href="#ico-v60"/></svg>
+        </div>
+        <div class="card__body">
+          <h3 class="card__name">耶加雪菲 · 水洗</h3>
+          <p class="card__desc">茉莉、柠檬皮、尾段蜂蜜。92℃ / 1:15 / 三段注水。</p>
+          <div class="card__foot">
+            <span class="card__price">¥ 38</span>
+            <span class="card__origin">Ethiopia</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__media">
+          <span class="card__tag">奶咖</span>
+          <svg class="ph" role="img" aria-label="燕麦拿铁拉花"><use href="#ico-latte"/></svg>
+        </div>
+        <div class="card__body">
+          <h3 class="card__name">燕麦拿铁</h3>
+          <p class="card__desc">中深烘拼配 + 燕麦奶，醇厚不抢戏，奶香干净。</p>
+          <div class="card__foot">
+            <span class="card__price">¥ 32</span>
+            <span class="card__origin">House Blend</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__media">
+          <span class="card__tag">冷萃</span>
+          <svg class="ph" role="img" aria-label="冰滴冷萃"><use href="#ico-coldbrew"/></svg>
+        </div>
+        <div class="card__body">
+          <h3 class="card__name">冷萃 · 18h</h3>
+          <p class="card__desc">18 小时低温慢萃，黑巧与坚果，冰镇直饮。</p>
+          <div class="card__foot">
+            <span class="card__price">¥ 36</span>
+            <span class="card__origin">Cold Brew</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__media">
+          <span class="card__tag">手作</span>
+          <svg class="ph" role="img" aria-label="巴斯克芝士蛋糕"><use href="#ico-cake"/></svg>
+        </div>
+        <div class="card__body">
+          <h3 class="card__name">巴斯克芝士</h3>
+          <p class="card__desc">焦面、绵心、微咸。配冷萃或手冲都合适。</p>
+          <div class="card__foot">
+            <span class="card__price">¥ 28</span>
+            <span class="card__origin">Daily Bake</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 空间环境 -->
+<section class="place" id="place">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">The Space · 空间</p>
+      <h2>八张椅子，一扇窗。</h2>
+      <p>没有打卡墙，也没有网红角落。原木、白墙、一盏暖灯，剩下的交给下午的光。</p>
+    </div>
+    <div class="place__grid">
+      <div class="place__cell place__cell--a reveal">
+        <svg class="ph" role="img" aria-label="店门头"><use href="#ico-door"/></svg>
+      </div>
+      <div class="place__cell place__cell--b reveal">
+        <svg class="ph" role="img" aria-label="室内植物角"><use href="#ico-plants"/></svg>
+      </div>
+      <div class="place__cell place__cell--c reveal">
+        <svg class="ph" role="img" aria-label="吧台咖啡机"><use href="#ico-bar"/></svg>
+      </div>
+      <div class="place__cell place__cell--d reveal">
+        <svg class="ph" role="img" aria-label="窗边单椅小桌"><use href="#ico-window"/></svg>
+      </div>
+      <div class="place__cell place__cell--e reveal">
+        <svg class="ph" role="img" aria-label="店内全景"><use href="#ico-pano"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 到店信息 -->
+<section class="visit" id="visit">
+  <div class="wrap visit__grid">
+    <div class="visit__info reveal">
+      <p class="eyebrow">Visit Us · 到店</p>
+      <h2 style="font-size:clamp(32px,4vw,48px);margin-bottom:32px">来坐一会。</h2>
+      <dl>
+        <dt>地址</dt><dd>台北市大安区永康街 27 巷 3 号</dd>
+        <dt>电话</dt><dd>02-2391-1024</dd>
+        <dt>邮件</dt><dd>hello@roastroam.coffee</dd>
+        <dt>交通</dt><dd>捷运东门站 5 号口，步行 4 分钟</dd>
+      </dl>
+      <div class="visit__hours">
+        <h3>营业时间</h3>
+        <ul>
+          <li><span>周一 — 周四</span><span>08:00 — 21:00</span></li>
+          <li><span>周五 — 周六</span><span>08:00 — 22:00</span></li>
+          <li><span>周日</span><span>09:00 — 20:00</span></li>
+          <li><span>每月第一个周二</span><span>烘焙日 · 公休</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="visit__map reveal">
+      <div class="gridlines"></div>
+      <span class="pin"></span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="brand__cn">焙行</span>
+        <span class="brand__en" style="display:block;margin-top:6px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)">Roast &amp; Roam Coffee</span>
+        <p class="foot__tag">单一产区，小批次烘焙。让一杯咖啡回到它本来的样子。</p>
+      </div>
+      <div class="foot__cols">
+        <div class="foot__col">
+          <h4>关于</h4>
+          <ul>
+            <li><a href="#story">品牌故事</a></li>
+            <li><a href="#menu">今日出品</a></li>
+            <li><a href="#place">空间</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h4>联系</h4>
+          <ul>
+            <li><a href="#visit">到店信息</a></li>
+            <li><a href="mailto:hello@roastroam.coffee">寄一封信</a></li>
+            <li><a href="#">私厨预订</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h4>跟随</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">小红书</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="hairline" />
+    <div class="foot__bottom">
+      <span>© 2026 焙行 Roast &amp; Roam Coffee · 慢，是一种立场。</span>
+      <span>Crafted slowly, in Taipei.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // 移动端汉堡菜单
+  var toggle = document.getElementById("navToggle");
+  var links = document.getElementById("navLinks");
+  toggle.addEventListener("click", function () {
+    var open = links.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  links.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") {
+      links.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // 滚动时导航底边加深
+  var nav = document.getElementById("nav");
+  function onScroll() {
+    if (window.scrollY > 12) {
+      nav.style.borderColor = "#dcdcdc";
+    } else {
+      nav.style.borderColor = "var(--line)";
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // 滚动显隐
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  // 当前 section 高亮
+  var linkMap = {};
+  document.querySelectorAll(".nav__links a").forEach(function (a) {
+    linkMap[a.getAttribute("data-link")] = a;
+  });
+  var sections = ["story", "menu", "place", "visit"].map(function (id) {
+    return document.getElementById(id);
+  }).filter(Boolean);
+  if ("IntersectionObserver" in window) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          Object.keys(linkMap).forEach(function (k) {
+            linkMap[k].classList.remove("is-active");
+          });
+          var key = en.target.id;
+          if (linkMap[key]) linkMap[key].classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function (s) { so.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
